@@ -89,7 +89,7 @@ Kundennr,Name,Stadt,Land,Region,Telefon
 ...
 ```
 # ZCUSTOMER_SALES_REPORT
-This provides a powerful tool for analyzing customer order data interactively within SAP GUI and the ability to export this data for further analysis or reporting.
+This provides a tool for analyzing customer order data interactively within SAP GUI and the ability to export this data for further analysis or reporting.
 
 ### PARAMETERS: p_city TYPE kna1-ort01 OBLIGATORY.
 
