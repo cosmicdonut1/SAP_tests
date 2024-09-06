@@ -1,6 +1,6 @@
 # SAP_tests
 
-## ZMODERN_PURCHASE_ORDER_LIST
+# ZMODERN_PURCHASE_ORDER_LIST
 This code allows the user to quickly retrieve and display purchase order data based on the specified conditions.
 
 ### REPORT ZMODERN_PURCHASE_ORDER_LIST.
@@ -30,7 +30,8 @@ Bestellnr: 4500000012   Pos: 0010   Material: 12345678   Menge: 100,000   Preis:
 Bestellnr: 4500000013   Pos: 0010   Material: 87654321   Menge: 200,000   Preis: 200,00   Währung: USD
 ```
 
-## ZCUSTOMER_DATA_EXPORT
+
+# ZCUSTOMER_DATA_EXPORT
 This program not only retrieves and displays customer data based on the entered city name but also exports these data to a CSV file for further analysis or reporting, adding significant utility to the original functionality.
 
 ### REPORT ZCUSTOMER_DATA_EXPORT.
@@ -85,5 +86,51 @@ Kundennr: 100002   Name: XYZ Ltd           Stadt: Berlin   Land: DE   Region: BE
 Kundennr,Name,Stadt,Land,Region,Telefon
 100001,ABC Corp,Berlin,DE,BE,0301234567
 100002,XYZ Ltd,Berlin,DE,BE,0307654321
+...
+```
+# ZCUSTOMER_SALES_REPORT
+This provides a powerful tool for analyzing customer order data interactively within SAP GUI and the ability to export this data for further analysis or reporting.
+
+### PARAMETERS: p_city TYPE kna1-ort01 OBLIGATORY.
+
+This parameter p_city allows for the input of a city name to filter customer data. It is mandatory for execution.
+### Define types for customer, order, and report structures:
+
+ty_customer: Structure for customer data.
+ty_order: Structure for order data.
+ty_report: Combined structure for the final report to be displayed and exported.
+### Create internal tables:
+
+lt_customers: To store customer data.
+lt_orders: To store order data.
+lt_report: To store final report data combining customer and order data.
+### Data selection:
+
+SELECT ... INTO TABLE lt_customers: Gets customer data from KNA1 filtered by the city (parameter p_city).
+SELECT ... INTO TABLE lt_orders: Gets order data from VBAK for all selected customers (using FOR ALL ENTRIES).
+### Merge customer and order data:
+
+Nested loops combine customer and order data into the lt_report table.
+### ALV Display:
+
+Creates and initializes an ALV Grid.
+Sets the screen status and title.
+Displays the data in lt_report using ALV.
+### User command handling:
+
+Handles user commands, such as exporting data to CSV or exiting the program.
+### Export to CSV:
+
+FORM export_to_csv.: Opens a file, writes headers, loops through the report data (lt_report), writes each record to the CSV file, and closes the file.
+Displays a message indicating a successful export.
+## Example Output:
+### SAP GUI ALV Report
+* Interactive report with columns: Customer No, Name, City, Country, Region, Phone, Order No, Order Date, Order Amount.
+* Users can sort, filter, and interact with the displayed data.
+### CSV File
+```abap
+Customer No, Name, City, Country, Region, Phone, Order No, Order Date, Order Amount
+100001,ABC Corp,Berlin,DE,BE,0301234567,4500000010,2023-01-01,1000.00
+100002,XYZ Ltd,Berlin,DE,BE,0307654321,4500000011,2023-01-02,1500.00
 ...
 ```
