@@ -1,5 +1,4 @@
 # SAP_tests
-small tests
 
 ## ZMODERN_PURCHASE_ORDER_LIST
 
